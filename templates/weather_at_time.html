@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода по времени</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+    
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    
+        .top-panel {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        .top-panel .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+    
+        .top-panel .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    
+        .top-panel .nav-links a:hover {
+            background-color: #0056b3;
+        }
+    
+        .top-panel .logout-btn {
+            padding: 8px 16px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        .top-panel .logout-btn:hover {
+            background-color: #e60000;
+        }
+    
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    
+        .main-content h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    
+        .main-content p {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+    
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 600px;
+        }
+    
+        .form-container label {
+            font-size: 16px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+    
+        .form-container input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        .form-container input[type="checkbox"] {
+            width: auto;
+        }
+    
+        .form-container button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    
+        .weather-results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+    
+        .weather-results h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+    
+        .weather-results p {
+            font-size: 16px;
+            color: #444;
+        }
+    
+        .weather-results ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+    
+        .weather-results ul li {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+    
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+    
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-panel">
+            <div class="nav-links">
+                <a href="/home">Домашняя страница</a>
+                <a href="/weather">Посмотреть прогноз по координатам</a>
+                <a href="/add_city">Добавить новый город</a>
+                <a href="/cities">Список городов</a>
+                <a href="/weather_at_time">Узнать прогноз погоды</a>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='/logout'">Выйти</button>
+        </div>
+
+        <div class="main-content">
+            <h1>Погода для города {{ city_name }}</h1>
+            <p>Введите название города и время для получения прогноза погоды на указанное время.</p>
+
+            <div class="form-container">
+                <form method="get" action="/weather_at_time">
+                    <label for="city_name">Название города:</label>
+                    <input type="text" name="city_name" id="city_name" value="{{ city_name }}" required>
+
+                    <label for="time">Время (формат: YYYY-MM-DD HH:MM):</label>
+                    <input type="text" name="time" id="time" value="{{ time }}" required>
+
+                    <label for="params">Выберите параметры погоды:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="params" value="temperature_2m" {% if 'temperature_2m' in params %}checked{% endif %}> Температура</label>
+                        <label><input type="checkbox" name="params" value="relative_humidity_2m" {% if 'relative_humidity_2m' in params %}checked{% endif %}> Влажность</label>
+                        <label><input type="checkbox" name="params" value="wind_speed_10m" {% if 'wind_speed_10m' in params %}checked{% endif %}> Скорость ветра</label>
+                        <label><input type="checkbox" name="params" value="precipitation" {% if 'precipitation' in params %}checked{% endif %}> Осадки</label>
+                    </div>
+
+                    <button type="submit">Получить погоду</button>
+                </form>
+            </div>
+
+            <hr>
+
+            {% if weather_data %}
+            <div class="weather-results">
+                <h2>Данные погоды на {{ time }}:</h2>
+                <ul>
+                    {% for param, value in weather_data.items() %}
+                    <li>{{ param }}: {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% elif error_message %}
+                <p>{{ error_message }}</p>
+            {% else %}
+                <p>Данные не найдены для указанного города и времени.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

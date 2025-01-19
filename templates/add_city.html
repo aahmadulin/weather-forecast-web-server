@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить новый город</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-panel {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-panel .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-panel .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .top-panel .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .top-panel .logout-btn {
+            padding: 8px 16px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .top-panel .logout-btn:hover {
+            background-color: #e60000;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content h1 {
+            color: #333;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-container label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-panel">
+            <div class="nav-links">
+                <a href="/home">Домашняя страница</a>
+                <a href="/weather">Посмотреть прогноз по координатам</a>
+                <a href="/add_city">Добавить новый город</a>
+                <a href="/cities">Список городов</a>
+                <a href="/weather_at_time">Узнать прогноз погоды</a>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='/logout'">Выйти</button>
+        </div>
+
+        <div class="main-content">
+            <h1>Добавить новый город</h1>
+
+            <div class="form-container">
+                <form method="POST" action="/add_city">
+                    <div>
+                        <label for="name">Введите название города:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="latitude">Широта:</label>
+                        <input type="text" id="latitude" name="latitude" required>
+                    </div>
+                    <div>
+                        <label for="longitude">Долгота:</label>
+                        <input type="text" id="longitude" name="longitude" required>
+                    </div>
+
+                    <button type="submit">Добавить город</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

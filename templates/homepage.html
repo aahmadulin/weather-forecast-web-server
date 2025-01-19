@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашняя страница</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-panel {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-panel .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-panel .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .top-panel .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .top-panel .logout-btn {
+            padding: 8px 16px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .top-panel .logout-btn:hover {
+            background-color: #e60000;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content h1 {
+            color: #333;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .main-content button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .main-content button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top-panel">
+            <div class="nav-links">
+                <a href="/home">Домашняя страница</a>
+                <a href="/weather">Посмотреть прогноз по координатам</a>
+                <a href="/add_city">Добавить новый город</a>
+                <a href="/cities">Список городов</a>
+                <a href="/weather_at_time">Узнать прогноз погоды</a>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='/logout'">Выйти</button>
+        </div>
+
+        <div class="main-content">
+            <h1>Добро пожаловать на домашнюю страницу</h1>
+            <p>В профиле отображается основная информация о вашем аккаунте</p>
+            <button onclick="window.location.href='/profile'">Перейти в Профиль</button>
+        </div>
+    </div>
+
+</body>
+</html>
