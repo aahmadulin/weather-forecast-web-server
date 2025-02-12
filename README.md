@@ -43,3 +43,9 @@
 - **`GET /home`**: Отображение домашней страницы.
 - **`GET /profile`**: Отображение профиля пользователя.
 - **`GET /about`**: Отображение информации о проекте.
+
+![image_2025-02-13_00-30-24](https://github.com/user-attachments/assets/f689d332-cfcd-4108-8154-ca349d6be2f3)
+![image_2025-02-13_00-30-07](https://github.com/user-attachments/assets/7ffaae54-000c-4845-a7e5-2c6a024d12e3)
+![image_2025-02-13_00-29-51](https://github.com/user-attachments/assets/85635837-9453-43d4-b9a9-086ce3a375c7)
+![image_2025-02-13_00-30-40](https://github.com/user-attachments/assets/e03f4548-3743-47a5-8c02-3eeea65ae607)
+
